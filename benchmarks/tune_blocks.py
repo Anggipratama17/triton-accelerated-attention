@@ -1,6 +1,6 @@
 import torch
 import time
-from attention_kernel import attention_fwd
+from kernels.attention_kernel import attention_fwd
 
 device = "cuda"
 torch.manual_seed(0)

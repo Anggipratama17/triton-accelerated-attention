@@ -1,11 +1,11 @@
 import torch
 import torch.nn as nn
-from triton_attention_layer import TritonAttention
+from kernels.triton_attention_layer import TritonAttentionLayer
 
 class MiniTransformer(nn.Module):
     def __init__(self, dim, hidden_dim):
         super().__init__()
-        self.attn = TritonAttention(dim=dim, num_heads=8)
+        self.attn = TritonAttentionLayer(dim=dim, num_heads=8)
         self.linear1 = nn.Linear(dim, hidden_dim)
         self.linear2 = nn.Linear(hidden_dim, dim)
         self.norm1 = nn.LayerNorm(dim)
@@ -14,7 +14,7 @@ class MiniTransformer(nn.Module):
 
     def forward(self, x):
         # Attention
-        attn_out = self.attn(x, x, x)
+        attn_out = self.attn(x)
         x = self.norm1(x + attn_out)
         # Feed-forward
         ff_out = self.linear2(self.activation(self.linear1(x)))

@@ -1,8 +1,8 @@
 import torch
 import time
 import matplotlib.pyplot as plt
-from triton_attention_layer import TritonAttentionLayer
 
+from kernels.triton_attention_layer import TritonAttentionLayer
 
 def benchmark_once(N, triton_attn, torch_attn, device):
     x = torch.randn(1, N, triton_attn.dim, device=device)

@@ -3,7 +3,7 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 
-from triton_attention_layer import TritonAttentionLayer
+from kernels.triton_attention_layer import TritonAttentionLayer
 
 
 # ------------------------------------------------------------

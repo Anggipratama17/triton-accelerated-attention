@@ -1,6 +1,6 @@
 import torch
 from torch.profiler import profile, ProfilerActivity
-from mini_transformer import MiniTransformer
+from kernels.mini_transformer import MiniTransformer
 
 torch.set_float32_matmul_precision("high")
 

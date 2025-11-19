@@ -1,12 +1,13 @@
 import torch, time
-from triton_attention_layer import TritonAttention
+
+from kernels.triton_attention_layer import TritonAttentionLayer
 
 def benchmark(num_heads):
-    model = TritonAttention(dim=128, num_heads=num_heads).cuda()
+    model = TritonAttentionLayer(dim=128, num_heads=num_heads).cuda()
     x = torch.randn(1, 64, 128, device='cuda')
     torch.cuda.synchronize()
     start = time.time()
-    _ = model(x, x, x)
+    _ = model(x)
     torch.cuda.synchronize()
     end = time.time()
     return (end - start) * 1000  # ms

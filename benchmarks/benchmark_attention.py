@@ -1,6 +1,13 @@
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
 import torch
 import time
-from triton_attention_layer import TritonAttentionLayer
+
+from kernels.triton_attention_layer import TritonAttentionLayer
+from kernels.triton_attention_softmax import attn_softmax_kernel
+from kernels.triton_attention_scores import attention_scores_kernel
+from kernels.triton_attention_values import attention_values_kernel
 
 
 def benchmark_attention():
@@ -19,8 +26,6 @@ def benchmark_attention():
 
     # Copy projection weights so both implementations match
     with torch.no_grad():
-
-        # in_proj_weight = concat(Q, K, V)
         torch_attn.in_proj_weight.copy_(
             torch.cat([
                 triton_attn.q_proj.weight,
@@ -29,12 +34,8 @@ def benchmark_attention():
             ], dim=0)
         )
 
-        # Triton uses no biases → zero out PyTorch biases
         torch_attn.in_proj_bias.zero_()
-
         torch_attn.out_proj.weight.copy_(triton_attn.out_proj.weight)
-
-        # Triton does not use output bias → zero it for PyTorch
         torch_attn.out_proj.bias.zero_()
 
     # Warmup
@@ -59,7 +60,6 @@ def benchmark_attention():
     print(f"Triton attention:   {triton_time*1000:.3f} ms")
     print(f"PyTorch attention:  {torch_time*1000:.3f} ms")
 
-    # Save results
     with open("benchmark_results.txt", "w") as f:
         f.write(f"{triton_time} {torch_time}\n")
 

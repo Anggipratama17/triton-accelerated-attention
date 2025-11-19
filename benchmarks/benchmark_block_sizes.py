@@ -4,9 +4,9 @@ import triton.language as tl
 import time
 import matplotlib.pyplot as plt
 
-from triton_attention_scores import attention_scores_kernel
-from triton_attention_softmax import attn_softmax_kernel
-from triton_attention_values import attention_values_kernel
+from kernels.triton_attention_scores import attention_scores_kernel
+from kernels.triton_attention_softmax import attn_softmax_kernel
+from kernels.triton_attention_values import attention_values_kernel
 
 
 # A small wrapper so we can call the full attention pipeline

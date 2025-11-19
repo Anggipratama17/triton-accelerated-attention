@@ -1,7 +1,6 @@
 import triton
 import triton.language as tl
 
-
 @triton.jit
 def attention_values_kernel(
     probs_ptr, v_ptr, out_ptr,
@@ -13,21 +12,21 @@ def attention_values_kernel(
     BLOCK_N: tl.constexpr,
     BLOCK_D: tl.constexpr,
 ):
-    pid_m = tl.program_id(0)   # block of rows (queries)
-    pid_h = tl.program_id(1)   # batch*head index
+    pid_m = tl.program_id(0)        # row block
+    pid_bh = tl.program_id(1)       # batch + head
 
-    b = pid_h // H
-    h = pid_h % H
+    b = pid_bh // H
+    h = pid_bh % H
 
-    offs_m = pid_m * BLOCK_M + tl.arange(0, BLOCK_M)      # [M]
-    offs_n = tl.arange(0, BLOCK_N)                        # [N]
-    offs_d = tl.arange(0, BLOCK_D)                        # [D]
+    offs_m = pid_m * BLOCK_M + tl.arange(0, BLOCK_M)  # [M]
+    offs_n = tl.arange(0, BLOCK_N)                    # [N]
+    offs_d = tl.arange(0, BLOCK_D)                    # [D]
 
     mask_m = offs_m < N
     mask_n = offs_n < N
     mask_d = offs_d < D
 
-    # ---- Load probabilities ----
+    # Load probs block [M, N]
     probs_ptrs = (
         probs_ptr
         + b * stride_pb
@@ -35,9 +34,9 @@ def attention_values_kernel(
         + offs_m[:, None] * stride_pn
         + offs_n[None, :]
     )
-    probs = tl.load(probs_ptrs, mask=mask_m[:, None] & mask_n[None, :], other=0.0)
+    probs_block = tl.load(probs_ptrs, mask=mask_m[:, None] & mask_n[None, :], other=0.0)
 
-    # ---- Load V ----
+    # Load V block [N, D]
     v_ptrs = (
         v_ptr
         + b * stride_vb
@@ -45,16 +44,12 @@ def attention_values_kernel(
         + offs_n[:, None] * stride_vn
         + offs_d[None, :] * stride_vd
     )
-    v = tl.load(
-        v_ptrs,
-        mask=mask_n[:, None] & mask_d[None, :],
-        other=0.0,
-    )
+    v_block = tl.load(v_ptrs, mask=mask_n[:, None] & mask_d[None, :], other=0.0)
 
-    # ---- Compute weighted sum ----
-    out_block = tl.dot(probs, v)   # [M, D]
+    # Multiply: [M, N] @ [N, D] -> [M, D]
+    out_block = tl.dot(probs_block, v_block)
 
-    # ---- Write output ----
+    # Store output
     out_ptrs = (
         out_ptr
         + b * stride_ob
